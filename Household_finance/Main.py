@@ -13,12 +13,12 @@ class Main(tk.Frame):
         toolbar = tk.Frame(bg='#d7d8e0', bd=2)
         toolbar.pack(side=tk.TOP, fill=tk.X)
 
-        self.add_img = tk.PhotoImage(file = 'add.gif')
+        self.add_img = tk.PhotoImage(file = 'Household_finance\\add.gif')
         btn_open_dialog = tk.Button(toolbar, text='Добавить позицию', command=self.open_dialog, bg='#d7d8e0', bd=0,
                                     compound=tk.TOP, image=self.add_img)
         btn_open_dialog.pack(side=tk.LEFT)
 
-        self.update_img = tk.PhotoImage(file = 'update.gif')
+        self.update_img = tk.PhotoImage(file = 'Household_finance\\update.gif')
         btn_edit_dialog = tk.Button(toolbar, text='Редактировать', command=self.open_update_dialog, bg='#d7d8e0', bd=0,
                                     compound=tk.TOP, image=self.update_img)
         btn_edit_dialog.pack(side=tk.LEFT)
@@ -99,7 +99,7 @@ class Child(tk.Toplevel):
 
 class DB:
     def __init__(self):
-        self.conn = sqlite3.connect('finance.db')
+        self.conn = sqlite3.connect('Household_finance\\finance.db')
         self.c = self.conn.cursor()    # с - экземпляр класса
         # Формируем запрос к БД
         self.c.execute('''CREATE TABLE IF NOT EXISTS finance (id integer primary key,
