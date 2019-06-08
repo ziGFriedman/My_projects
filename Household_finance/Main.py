@@ -18,7 +18,7 @@ class Main(tk.Frame):
                                     compound=tk.TOP, image=self.add_img)
         btn_open_dialog.pack(side=tk.LEFT)
 
-        self.update_img = tk.PhotoImage(file = 'Household_finance\\update.gif')
+        self.update_img = tk.PhotoImage(file='Household_finance\\update.gif')
         btn_edit_dialog = tk.Button(toolbar, text='Редактировать', command=self.open_update_dialog, bg='#d7d8e0', bd=0,
                                     compound=tk.TOP, image=self.update_img)
         btn_edit_dialog.pack(side=tk.LEFT)
