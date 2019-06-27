@@ -38,7 +38,7 @@ def login():
     enter_login = Entry()
     text_enter_pass = Label(text='Введите Ваш пароль:')
     enter_password = Entry(show='*')
-    button_enter = Button(text='Войти')
+    button_enter = Button(text='Войти', command=lambda: log_pass())
     text_log.pack()
     text_enter_login.pack()
     enter_login.pack()
@@ -48,7 +48,15 @@ def login():
 
     def log_pass():
         f = open('Login\\login.txt', 'rb')
-
+        a = pickle.load(f)
+        f.close()
+        if enter_login.get() in a:
+            if enter_password.get() == a[enter_login.get()]:
+                messagebox.showinfo('Вход выполнен', 'Привет! У тебя 5 новых сообщений!')
+            else:
+                messagebox.showerror('Ошибка!', 'Вы ввели неверный логин или пароль!')
+        else:
+            messagebox.showerror('Ошибка!', 'Неверный логин!')
 
 registration()
 
