@@ -23,6 +23,20 @@ def registration():
     registr_password2.pack()
     button_registr.pack()
 
+def login():
+    text_log = Label(text='Поздравляем! Теперь вы можете войти в систему!')
+    text_enter_login = Label(text='Введите Ваш логин:')
+    enter_login = Entry()
+    text_enter_pass = Label(text='Введите Ваш пароль:')
+    enter_password = Entry(show='*')
+    button_enter = Button(text='Войти')
+    text_log.pack()
+    text_enter_login.pack()
+    enter_login.pack()
+    text_enter_pass.pack()
+    enter_password.pack()
+    button_enter.pack()
+
 registration()
 
 root.mainloop()
