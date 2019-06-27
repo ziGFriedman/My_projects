@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
+import pickle
 
 root = Tk()
 root.geometry('300x500')
@@ -13,7 +14,7 @@ def registration():
     registr_password1 = Entry(show='*')
     text_password2 = Label(text='Ещё раз пароль:')
     registr_password2 = Entry(show='*')
-    button_registr = Button(text='Зарегистрироваться!')
+    button_registr = Button(text='Зарегистрироваться!', command=lambda: save())
     text.pack()
     text_log.pack()
     registr_login.pack()
@@ -22,6 +23,14 @@ def registration():
     text_password2.pack()
     registr_password2.pack()
     button_registr.pack()
+
+    def save():
+        login_pass_save = {}
+        login_pass_save[registr_login.get()] = registr_password1.get()
+        f = open('Login\\login.txt', 'wb')
+        pickle.dump(login_pass_save, f)
+        f.close()
+        login()
 
 def login():
     text_log = Label(text='Поздравляем! Теперь вы можете войти в систему!')
@@ -36,6 +45,10 @@ def login():
     text_enter_pass.pack()
     enter_password.pack()
     button_enter.pack()
+
+    def log_pass():
+        f = open('Login\\login.txt', 'rb')
+
 
 registration()
 
