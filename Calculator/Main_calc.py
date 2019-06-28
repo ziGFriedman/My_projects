@@ -21,21 +21,37 @@ def calc(key):
         except:
             calc_entry.insert(END, 'Ошибка!')
             messagebox.showerror('Ошибка!', 'Проверь правильность данных!')
-            
-
+    # Очистить поле
+    elif key == 'C':
+        calc_entry.delete(0, END)
+    # Смена -/+
+    elif key == '-/+':
+        if '=' in calc_entry.get():
+            calc_entry.delete(0, END)
+            try:
+                if calc_entry.get()[0] == '-':
+                    calc_entry.delete(0)
+                else:
+                    calc_entry.insert(0, '-')
+            except IndexError:
+                pass
+    else:
+        if '=' in calc_entry.get():
+            calc_entry.delete(0, END)
+        calc_entry.insert(END, key)
 
 # Создаем кнопки
 bttn_list = [
     '7', '8', '9', '+', '-',
     '4', '5', '6', '*', '/',
-    '1', '2', '3', '-/+', '='
+    '1', '2', '3', '-/+', '=',
     '0', '.', 'C'
 ]
 r = 1
 c = 0
 for i in bttn_list:
     rel = ''
-    cmd=lambda x=i: #calc(x)
+    cmd=lambda x=i: calc(x)
     ttk.Button(root, text=i, command=cmd).grid(row=r, column=c)
     c += 1
     if c > 4:
