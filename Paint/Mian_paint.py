@@ -32,7 +32,6 @@ red_btn = Button(text='Красный', width=10, command=lambda: color_change('
 blue_btn = Button(text='Голубой', width=10, command=lambda: color_change('blue'))
 black_btn = Button(text='Чёрный', width=10, command=lambda: color_change('black'))
 white_btn = Button(text='Ластик', width=10, command=lambda: color_change('white'))
-
 clear_btn = Button(text='Удалить всё', width=10, command=lambda: w.delete('all'))
 
 w.grid(row=2, column=0, columnspan=7, padx=5, pady=5, sticky=E+W+S+N)
@@ -43,7 +42,6 @@ red_btn.grid(row=0, column=2)
 blue_btn.grid(row=0, column=3)
 black_btn.grid(row=0, column=4)
 white_btn.grid(row=0, column=5)
-
-clear_btn.grid(row=0, column=6)
+clear_btn.grid(row=0, column=6, sticky=W)
 
 root.mainloop()
