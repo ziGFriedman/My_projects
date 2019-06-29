@@ -34,6 +34,12 @@ black_btn = Button(text='Чёрный', width=10, command=lambda: color_change('
 white_btn = Button(text='Ластик', width=10, command=lambda: color_change('white'))
 clear_btn = Button(text='Удалить всё', width=10, command=lambda: w.delete('all'))
 
+one_btn = Button(text='2', width=10, command=lambda: brush_size_change(2))
+five_btn = Button(text='5', width=10, command=lambda: brush_size_change(5))
+ten_btn = Button(text='10', width=10, command=lambda: brush_size_change(10))
+twelve_btn = Button(text='12', width=10, command=lambda: brush_size_change(12))
+twenty_btn = Button(text='15', width=10, command=lambda: brush_size_change(15))
+
 w.grid(row=2, column=0, columnspan=7, padx=5, pady=5, sticky=E+W+S+N)
 w.columnconfigure(6, weight=1)
 w.rowconfigure(2, weight=1)
@@ -43,5 +49,11 @@ blue_btn.grid(row=0, column=3)
 black_btn.grid(row=0, column=4)
 white_btn.grid(row=0, column=5)
 clear_btn.grid(row=0, column=6, sticky=W)
+
+one_btn.grid(row=1, column=2)
+five_btn.grid(row=1, column=3)
+ten_btn.grid(row=1, column=4)
+twelve_btn.grid(row=1, column=5)
+twenty_btn.grid(row=1, column=6, sticky=W)
 
 root.mainloop()
