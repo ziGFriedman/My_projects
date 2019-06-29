@@ -28,4 +28,8 @@ root.title('Paint на Питоне')
 w = Canvas(root, width=canvas_width, height=canvas_height, bg='white')
 w.bind('<B1-Motion>', paint)
 
+w.grid(row=2, column=0, columnspan=7, padx=5, pady=5, sticky=E+W+S+N)
+w.columnconfigure(6, weight=1)
+w.rowconfigure(2, weight=1)
+
 root.mainloop()
