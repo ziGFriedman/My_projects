@@ -59,7 +59,7 @@ def stop():
 
 root = Tk()
 root.title('Бомба')
-root.geometry('500x500')
+root.geometry('500x440')
 
 startLabel = Label(root, text='Нажми Enter, чтобы начать игру!', font=('Helvetica', 12))
 bombLabel = Label(root, text='Фитиль:' + str(bomb), font=('Helvetica', 12))
@@ -80,7 +80,6 @@ bomb_normal.pack()
 btn_no_bomb.pack()
 
 bang_photo = Label(root, image=bangphoto)
-bang_photo.pack()
 
 root.bind('<Return>', start)
 
