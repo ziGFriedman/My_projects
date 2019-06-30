@@ -28,6 +28,21 @@ def updateDisplay():
     dayLabel.config(text='День:' + str(day))
     bomb_normal.after(100, updateDisplay)
 
+def updateBomb():
+    global bomb
+    bomb -= 1
+    if isAlive():
+        bombLabel.after(500, updateBomb)
+
+def isAlive():
+    global bomb
+    if bomb <= 0:
+        startLabel.config(text='БАМ! БАМ!')
+        bomb_normal.config(image=bangphoto)
+        return False
+    else:
+        return True
+
 
 
 root = Tk()
@@ -35,8 +50,8 @@ root.title('Бомба')
 root.geometry('500x500')
 
 startLabel = Label(root, text='Нажми Enter, чтобы начать игру!', font=('Helvetica', 12))
-bombLabel = Label(root, text='Фитиль:',font=('Helvetica', 12))
-dayLabel = Label(root, text='День:', font=('Helvetica', 12))
+bombLabel = Label(root, text='Фитиль:' + str(bomb),font=('Helvetica', 12))
+dayLabel = Label(root, text='День:' + str(day), font=('Helvetica', 12))
 
 nophoto = PhotoImage(file='Game_bomb\\bomb_no.gif')
 normalphoto = PhotoImage(file='Game_bomb\\bomb_normal.gif')
