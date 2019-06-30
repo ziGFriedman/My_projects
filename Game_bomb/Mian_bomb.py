@@ -43,14 +43,26 @@ def isAlive():
     else:
         return True
 
+def updateDay():
+    global day
+    day += 1
+    if isAlive():
+        dayLabel.after(5000, updateDay)
 
+def stop():
+    global bomb
+    if isAlive():
+        if bomb <= 79:
+            bomb += 20
+        else:
+            bomb -+ 20
 
 root = Tk()
 root.title('Бомба')
 root.geometry('500x500')
 
 startLabel = Label(root, text='Нажми Enter, чтобы начать игру!', font=('Helvetica', 12))
-bombLabel = Label(root, text='Фитиль:' + str(bomb),font=('Helvetica', 12))
+bombLabel = Label(root, text='Фитиль:' + str(bomb), font=('Helvetica', 12))
 dayLabel = Label(root, text='День:' + str(day), font=('Helvetica', 12))
 
 nophoto = PhotoImage(file='Game_bomb\\bomb_no.gif')
@@ -58,7 +70,7 @@ normalphoto = PhotoImage(file='Game_bomb\\bomb_normal.gif')
 bangphoto = PhotoImage(file='Game_bomb\\bang.gif')
 
 bomb_normal = Label(root, image=normalphoto)
-btn_no_bomb = Button(root, text='Нажми меня!')
+btn_no_bomb = Button(root, text='Нажми меня!', command=stop)
 
 startLabel.pack()
 bombLabel.pack()
@@ -66,6 +78,9 @@ dayLabel.pack()
 
 bomb_normal.pack()
 btn_no_bomb.pack()
+
+bang_photo = Label(root, image=bangphoto)
+bang_photo.pack()
 
 root.bind('<Return>', start)
 
