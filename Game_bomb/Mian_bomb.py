@@ -55,7 +55,7 @@ def stop():
         if bomb <= 79:
             bomb += 20
         else:
-            bomb -+ 20
+            bomb -= 20
 
 root = Tk()
 root.title('Бомба')
