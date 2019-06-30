@@ -29,11 +29,16 @@ w = Canvas(root, width=canvas_width, height=canvas_height, bg='white')
 w.bind('<B1-Motion>', paint)
 
 label1 = Label(text='Цвет кисти', width=10)
-red_btn = Button(text='Красный', width=10, bg='red', fg='white', command=lambda: color_change('red'))
-blue_btn = Button(text='Голубой', width=10, bg='blue', fg='white', command=lambda: color_change('blue'))
-black_btn = Button(text='Чёрный', width=10, bg='black', fg='white', command=lambda: color_change('black'))
-white_btn = Button(text='Ластик', width=10, bg='white', command=lambda: color_change('white'))
-clear_btn = Button(text='Удалить всё', width=10, command=lambda: w.delete('all'))
+red_btn = Button(text='Красный', width=10, bg='red', fg='white',
+                 command=lambda: color_change('red'))
+blue_btn = Button(text='Голубой', width=10, bg='blue', fg='white',
+                 command=lambda: color_change('blue'))
+black_btn = Button(text='Чёрный', width=10, bg='black', fg='white',
+                 command=lambda: color_change('black'))
+white_btn = Button(text='Ластик', width=10, bg='white',
+                 command=lambda: color_change('white'))
+clear_btn = Button(text='Удалить всё', width=10,
+                 command=lambda: w.delete('all'))
 
 label2 = Label(text='Размер кисти', width=10)
 one_btn = Button(text='2', width=10, command=lambda: brush_size_change(2))
