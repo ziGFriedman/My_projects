@@ -78,6 +78,17 @@ def moveent_handler(event):
 # Привязка к канвас
 c.bind('<KeyPress>', moveent_handler)
 
+# Отпускание клавишь
+def stop_pad(event):
+    global LEFT_PAD_SPEED
+    global RIGHT_PAD_SPEED
+    if event.keysym in 'ws':
+        LEFT_PAD_SPEED = 0
+    elif event.keysym in ('Up', 'Down'):
+        RIGHT_PAD_SPEED = 0
+
+c.bind('<KeyRelease>', stop_pad)
+
 main()
 
 root.mainloop()
