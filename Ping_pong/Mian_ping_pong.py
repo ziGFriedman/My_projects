@@ -34,12 +34,28 @@ BALL = c.create_oval(WIDTH/2-BALL_RADIUS/2, HEIGHT/2-BALL_RADIUS/2,
 LEFT_PAD = c.create_line(PAD_W/2, 0, PAD_W/2, PAD_H, width=PAD_W, fill='#DA70D6')
 RIGHT_PAD = c.create_line(WIDTH-PAD_W/2, 0, WIDTH-PAD_W/2, PAD_H, width=PAD_W, fill='#DA70D6')
 
-# Функции движения мяча
+#Скорости ракеток
+PAD_SPEED = 20
+LEFT_PAD_SPEED = 0
+RIGHT_PAD_SPEED = 0
+
+# Функции движения
 def move_ball():
     c.move(BALL, BALL_X_CHANGE, BALL_Y_CHANGE)
 
+def move_pads():
+    PADS = {LEFT_PAD: LEFT_PAD_SPEED,
+            RIGHT_PAD: RIGHT_PAD_SPEED}
+    for pad in PADS:
+        c.move(pad, 0, PADS[pad])
+        if c.coords(pad)[1] < 0:
+            c.move(pad, 0, -c.coords(pad)[1])
+        elif c.coords(pad)[3] > HEIGHT:
+            c.move(pad, 0, HEIGHT - c.coords(pad)[3])
+
 def main():
     move_ball()
+    move_pads()
     # Вызываем саму себя
     root.after(30, main)
 
