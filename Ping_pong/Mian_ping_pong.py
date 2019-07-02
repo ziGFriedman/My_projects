@@ -44,7 +44,7 @@ RIGHT_PAD = c.create_line(WIDTH-PAD_W/2, 0, WIDTH-PAD_W/2, PAD_H, width=PAD_W, f
 P_1_TEXT = c.create_text(WIDTH - WIDTH / 6, PAD_H / 4,
                          text=PLAYER_1_SCORE,
                          font='Arial 20', fill='aqua')
-P_2_TEXT = c.create_text(WIDTH - WIDTH / 6, PAD_H / 4,
+P_2_TEXT = c.create_text(WIDTH / 6, PAD_H / 4,
                          text=PLAYER_2_SCORE,
                          font='Arial 20', fill='aqua')
 
