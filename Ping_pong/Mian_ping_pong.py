@@ -59,6 +59,25 @@ def main():
     # Вызываем саму себя
     root.after(30, main)
 
+# Фокус на канвас (реакция на клавиши)
+c.focus_set()
+
+# Обработка нажатий
+def moveent_handler(event):
+    global LEFT_PAD_SPEED
+    global RIGHT_PAD_SPEED
+    if event.keysym == 'w':
+        LEFT_PAD_SPEED = -PAD_SPEED
+    elif event.keysym == 's':
+        LEFT_PAD_SPEED = PAD_SPEED
+    elif event.keysym == 'Up':
+        RIGHT_PAD_SPEED = -PAD_SPEED
+    elif event.keysym == 'Down':
+        RIGHT_PAD_SPEED = PAD_SPEED
+
+# Привязка к канвас
+c.bind('<KeyPress>', moveent_handler)
+
 main()
 
 root.mainloop()
