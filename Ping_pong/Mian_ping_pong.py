@@ -69,7 +69,24 @@ def move_ball():
     # Вертикальный отскок
     if ball_right + BALL_X_SPEED < RIGHT_LINE_DISTANCE and ball_left + BALL_X_SPEED > PAD_W:
         c.move(BALL, BALL_X_SPEED, BALL_Y_SPEED)
-        
+    elif ball_right == RIGHT_LINE_DISTANCE or ball_left == PAD_W:
+        if ball_right > WIDTH / 2:
+            if c.coords(RIGHT_PAD)[1] < ball_center < c.coords(RIGHT_PAD)[3]:
+                bounce('strike')
+            else:
+                pass
+        else:
+            if c.coords(LEFT_PAD)[1] < ball_center < c.coords(LEFT_PAD)[3]:
+                bounce('strike')
+            else:
+                pass
+    else:
+        if ball_right > WIDTH / 2:
+            c.move(BALL, RIGHT_LINE_DISTANCE - ball_right, BALL_Y_SPEED)
+        else:
+            c.move(BALL, -ball_left + PAD_W, BALL_Y_SPEED)
+    if ball_top + BALL_Y_SPEED < 0 or ball_bot + BALL_Y_SPEED > HEIGHT:
+        bounce('ricochet')
 
 def move_pads():
     PADS = {LEFT_PAD: LEFT_PAD_SPEED,
