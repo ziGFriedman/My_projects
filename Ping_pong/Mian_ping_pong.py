@@ -43,10 +43,10 @@ RIGHT_PAD = c.create_line(WIDTH-PAD_W/2, 0, WIDTH-PAD_W/2, PAD_H, width=PAD_W, f
 # Текст очков
 P_1_TEXT = c.create_text(WIDTH - WIDTH / 6, PAD_H / 4,
                          text=PLAYER_1_SCORE,
-                         font='Arial 7', fill='aqua')
+                         font='Arial 20', fill='aqua')
 P_2_TEXT = c.create_text(WIDTH - WIDTH / 6, PAD_H / 4,
                          text=PLAYER_2_SCORE,
-                         font='Arial 7', fill='aqua')
+                         font='Arial 20', fill='aqua')
 
 # Скорости ракеток
 PAD_SPEED = 20
@@ -72,7 +72,13 @@ def update_score(player):
         PLAYER_2_SCORE += 1
         c.itemconfig(P_2_TEXT, text=PLAYER_2_SCORE)
 
-def respawn():
+def respawn_ball():
+    global BALL_X_SPEED
+    c.coords(BALL, WIDTH / 2 - BALL_RADIUS / 2,
+             HEIGHT / 2 - BALL_RADIUS / 2,
+             WIDTH / 2 + BALL_RADIUS / 2,
+             HEIGHT / 2 + BALL_RADIUS / 2)
+    BALL_X_SPEED = - (BALL_X_SPEED * - INITIAL_SPEED) / abs(BALL_X_SPEED)
 
 # Отскок мяча от ракеток
 def bounce(action):
@@ -99,12 +105,14 @@ def move_ball():
             if c.coords(RIGHT_PAD)[1] < ball_center < c.coords(RIGHT_PAD)[3]:
                 bounce('strike')
             else:
-                pass
+                update_score('left')
+                respawn_ball()
         else:
             if c.coords(LEFT_PAD)[1] < ball_center < c.coords(LEFT_PAD)[3]:
                 bounce('strike')
             else:
-                pass
+                update_score('right')
+                respawn_ball()
     else:
         if ball_right > WIDTH / 2:
             c.move(BALL, RIGHT_LINE_DISTANCE - ball_right, BALL_Y_SPEED)
