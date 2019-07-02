@@ -1,5 +1,5 @@
 from tkinter import *
-
+import random
 # Настройки окна
 WIDTH = 900
 HEIGHT = 300
@@ -34,14 +34,42 @@ BALL = c.create_oval(WIDTH/2-BALL_RADIUS/2, HEIGHT/2-BALL_RADIUS/2,
 LEFT_PAD = c.create_line(PAD_W/2, 0, PAD_W/2, PAD_H, width=PAD_W, fill='#DA70D6')
 RIGHT_PAD = c.create_line(WIDTH-PAD_W/2, 0, WIDTH-PAD_W/2, PAD_H, width=PAD_W, fill='#DA70D6')
 
-#Скорости ракеток
+# Скорости ракеток
 PAD_SPEED = 20
 LEFT_PAD_SPEED = 0
 RIGHT_PAD_SPEED = 0
 
+# Скорость мяча с каждым ударом
+BALL_SPEED_UP = 1.00
+# Максимальная скорость мяча
+BALL_MAX_SPEED = 30
+# Начальная скорость мяча
+BALL_X_SPEED = 20
+BALL_Y_SPEED = 20
+# Расстояние до правого края
+RIGHT_LINE_DISTANCE = WIDTH - PAD_W
+
+# Отскок мяча от ракеток
+def bounce(action):
+    global BALL_X_SPEED
+    global BALL_Y_SPEED
+    if action == 'strike':
+        BALL_Y_SPEED = random.randrange(-10, 10)
+        if abs(BALL_X_SPEED) < BALL_MAX_SPEED:
+            BALL_X_SPEED *= -BALL_SPEED_UP
+        else:
+            BALL_X_SPEED = -BALL_X_SPEED
+    else:
+        BALL_Y_SPEED = -BALL_Y_SPEED
+
 # Функции движения
 def move_ball():
-    c.move(BALL, BALL_X_CHANGE, BALL_Y_CHANGE)
+    ball_left, ball_top, ball_right, ball_bot = c.coords(BALL)
+    ball_center = (ball_top + ball_bot) / 2
+    # Вертикальный отскок
+    if ball_right + BALL_X_SPEED < RIGHT_LINE_DISTANCE and ball_left + BALL_X_SPEED > PAD_W:
+        c.move(BALL, BALL_X_SPEED, BALL_Y_SPEED)
+        
 
 def move_pads():
     PADS = {LEFT_PAD: LEFT_PAD_SPEED,
