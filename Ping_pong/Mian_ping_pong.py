@@ -1,8 +1,14 @@
 from tkinter import *
 import random
+
 # Настройки окна
 WIDTH = 900
 HEIGHT = 300
+# Очки для каждого игрока
+PLAYER_1_SCORE = 0
+PLAYER_2_SCORE = 0
+# Счет скорости
+INITIAL_SPEED = 20
 # Ширина/высота ракетки
 PAD_W = 10
 PAD_H = 100
@@ -34,11 +40,18 @@ BALL = c.create_oval(WIDTH/2-BALL_RADIUS/2, HEIGHT/2-BALL_RADIUS/2,
 LEFT_PAD = c.create_line(PAD_W/2, 0, PAD_W/2, PAD_H, width=PAD_W, fill='#DA70D6')
 RIGHT_PAD = c.create_line(WIDTH-PAD_W/2, 0, WIDTH-PAD_W/2, PAD_H, width=PAD_W, fill='#DA70D6')
 
+# Текст очков
+P_1_TEXT = c.create_text(WIDTH - WIDTH / 6, PAD_H / 4,
+                         text=PLAYER_1_SCORE,
+                         font='Arial 7', fill='aqua')
+P_2_TEXT = c.create_text(WIDTH - WIDTH / 6, PAD_H / 4,
+                         text=PLAYER_2_SCORE,
+                         font='Arial 7', fill='aqua')
+
 # Скорости ракеток
 PAD_SPEED = 20
 LEFT_PAD_SPEED = 0
 RIGHT_PAD_SPEED = 0
-
 # Скорость мяча с каждым ударом
 BALL_SPEED_UP = 1.00
 # Максимальная скорость мяча
@@ -48,6 +61,18 @@ BALL_X_SPEED = 20
 BALL_Y_SPEED = 20
 # Расстояние до правого края
 RIGHT_LINE_DISTANCE = WIDTH - PAD_W
+
+def update_score(player):
+    global PLAYER_1_SCORE
+    global PLAYER_2_SCORE
+    if player == 'right':
+        PLAYER_1_SCORE += 1
+        c.itemconfig(P_1_TEXT, text=PLAYER_1_SCORE)
+    else:
+        PLAYER_2_SCORE += 1
+        c.itemconfig(P_2_TEXT, text=PLAYER_2_SCORE)
+
+def respawn():
 
 # Отскок мяча от ракеток
 def bounce(action):
