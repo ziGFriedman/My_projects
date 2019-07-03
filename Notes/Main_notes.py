@@ -28,8 +28,6 @@ def open_file():
     text.delete('1.0', END)
     text.insert('1.0', data)
 
-
-
 root = Tk()
 root.title('Заметки')
 root.geometry('400x400')
