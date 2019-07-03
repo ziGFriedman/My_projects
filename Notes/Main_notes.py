@@ -27,7 +27,7 @@ def open_file():
     data = inp.read()
     text.delete('1.0', END)
     text.insert('1.0', data)
-    
+
 
 
 root = Tk()
@@ -39,6 +39,11 @@ text.pack()
 
 menu_bar = Menu(root)
 file_menu = Menu(menu_bar)
+
+file_menu.add_command(label='Новый', command=new_file)
+file_menu.add_command(label='Открыть', command=open_file)
+file_menu.add_command(label='Сохранить как', command=save_as)
+
 menu_bar.add_cascade(label='Файл', menu=file_menu)
 
 root.config(menu=menu_bar)
