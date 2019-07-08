@@ -23,6 +23,11 @@ class Main(tk.Frame):
             bg='#d7d8e0', bd=0, compound=tk.TOP, image=self.update_img)
         btn_edit_dialog.pack(side=tk.LEFT)
 
+        self.delete_img = tk.PhotoImage(file='Household_finance\\delete.gif')
+        btn_delete = tk.Button(toolbar, text='Удалить позицию', command=self.delete_records,
+            bg='#d7d8e0', bd=0, compound=tk.TOP, image=self.delete_img)
+        btn_delete.pack(side=tk.LEFT)
+
         self.tree = ttk.Treeview(self, columns=('ID', 'description', 'costs', 'total'),
             height=15, show='headings')
 
