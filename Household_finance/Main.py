@@ -14,16 +14,17 @@ class Main(tk.Frame):
         toolbar.pack(side=tk.TOP, fill=tk.X)
 
         self.add_img = tk.PhotoImage(file = 'Household_finance\\add.gif')
-        btn_open_dialog = tk.Button(toolbar, text='Добавить позицию', command=self.open_dialog, bg='#d7d8e0', bd=0,
-                                    compound=tk.TOP, image=self.add_img)
+        btn_open_dialog = tk.Button(toolbar, text='Добавить позицию', command=self.open_dialog,
+            bg='#d7d8e0', bd=0, compound=tk.TOP, image=self.add_img)
         btn_open_dialog.pack(side=tk.LEFT)
 
         self.update_img = tk.PhotoImage(file='Household_finance\\update.gif')
-        btn_edit_dialog = tk.Button(toolbar, text='Редактировать', command=self.open_update_dialog, bg='#d7d8e0', bd=0,
-                                    compound=tk.TOP, image=self.update_img)
+        btn_edit_dialog = tk.Button(toolbar, text='Редактировать', command=self.open_update_dialog,
+            bg='#d7d8e0', bd=0, compound=tk.TOP, image=self.update_img)
         btn_edit_dialog.pack(side=tk.LEFT)
 
-        self.tree = ttk.Treeview(self, columns=('ID', 'description', 'costs', 'total'), height=15, show='headings')
+        self.tree = ttk.Treeview(self, columns=('ID', 'description', 'costs', 'total'),
+            height=15, show='headings')
 
         self.tree.column('ID', width=30, anchor=tk.CENTER)
         self.tree.column('description', width=365, anchor=tk.CENTER)
@@ -42,14 +43,17 @@ class Main(tk.Frame):
         self.view_records()    # вызов функции для автоматического отображения данных в виджет
 
     def update_record(self, description, costs, total):
-        self.db.c.execute('''UPDATE finance SET description=?, costs=?, total=? WHERE ID=?''', (description, costs, total, self.tree.set(self.tree.selection()[0], '#1')))
+        self.db.c.execute('''UPDATE finance SET description=?, costs=?, total=? WHERE ID=?''',
+            (description, costs, total, self.tree.set(self.tree.selection()[0], '#1')))
         self.db.conn.commit()
         self.view_records()
 
     def view_records(self):
         self.db.c.execute('''SELECT * FROM finance''')
-        [self.tree.delete(i) for i in self.tree.get_children()]    # очистка содержимого виджета
-        [self.tree.insert('', 'end', values=row) for row in self.db.c.fetchall()]    # отобразить содержимое в БД
+        # очистка содержимого виджета
+        [self.tree.delete(i) for i in self.tree.get_children()]
+        # отобразить содержимое в БД
+        [self.tree.insert('', 'end', values=row) for row in self.db.c.fetchall()]
 
     def open_dialog(self):
         Child()
@@ -91,8 +95,7 @@ class Child(tk.Toplevel):
         self.btn_ok = ttk.Button(self, text='Добавить')
         self.btn_ok.place(x=220, y=170)
         self.btn_ok.bind('<Button-1>', lambda event: self.view.records(self.entry_description.get(),
-                                                                       self.combobox.get(),
-                                                                       self.entry_money.get()))
+            self.combobox.get(), self.entry_money.get()))
 
         self.grab_set()    # перехват событий
         self.focus_set()    # захватывает и удерживает фокус
@@ -107,7 +110,8 @@ class DB:
         self.conn.commit()    # сохраняем изменения работ в БД
 
     def insert_data(self, description, costs, total):
-        self.c.execute('''INSERT INTO finance (description, costs, total) VALUES (?, ?, ?)''', (description, costs, total))
+        self.c.execute('''INSERT INTO finance (description, costs, total) VALUES (?, ?, ?)''',
+            (description, costs, total))
         self.conn.commit()
 
 class Update(Child):
@@ -121,8 +125,7 @@ class Update(Child):
         btn_edit = ttk.Button(self, text='Редактировать')
         btn_edit.place(x=205, y=170)
         btn_edit.bind('<Button-1>', lambda event: self.view.update_record(self.entry_description.get(),
-                                                                          self.combobox.get(),
-                                                                          self.entry_money.get()))
+            self.combobox.get(), self.entry_money.get()))
         self.btn_ok.destroy()
 
 if __name__ == '__main__':
