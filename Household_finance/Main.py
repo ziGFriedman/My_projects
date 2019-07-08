@@ -55,6 +55,13 @@ class Main(tk.Frame):
         # отобразить содержимое в БД
         [self.tree.insert('', 'end', values=row) for row in self.db.c.fetchall()]
 
+    def delete_records(self):
+        for selection_item in self.tree.selection():
+            self.db.c.execute('''DELETE FROM finance WHERE id=?''', (self.tree.set(
+                selection_item, '#1')))
+        self.db.conn.commit()
+        self.view_records()
+
     def open_dialog(self):
         Child()
 
