@@ -27,7 +27,7 @@ def get_name(url):
     return name
 
 def save_img(name, file_object):
-    with open('Parser_img/' + name, 'wb') as f:
+    with open(name, 'wb') as f:
         for chunk in file_object.iter_content(8192):
             f.write(chunk)
 
