@@ -1,4 +1,5 @@
 import requests
+import os
 
 # url = 'https://www.hdwallpapers.in/download/metal_abstract-HD.jpg'
 #
@@ -24,7 +25,15 @@ def get_name(url):
     # https://www.hdwallpapers.in/download/metal_abstract-HD.jpg
     # name: metal_abstract-HD.jpg
     name = url.split('/')[-1]
-    return name
+    # metal_abstract-HD
+    folder = name.split('.')[0]
+
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+
+    path = os.path.abspath(folder)
+
+    return path + '\\' + name
 
 def save_img(name, file_object):
     with open(name, 'wb') as f:
